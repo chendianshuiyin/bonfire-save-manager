@@ -1,0 +1,27 @@
+<Window x:Class="Bonfire.App.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="篝火 · 魂系存档管理器" Width="1280" Height="820" MinWidth="1100" MinHeight="700" Background="#131820" FontFamily="Microsoft YaHei UI" FontSize="13" WindowStartupLocation="CenterScreen">
+ <Grid Margin="30,24">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Grid Margin="0,0,0,24"><StackPanel><TextBlock Text="BONFIRE / 篝火" FontSize="30" FontWeight="SemiBold" Foreground="#E9AC67"/><TextBlock Text="每一次远征，都有归处。" Foreground="#9BA3B0" Margin="0,6,0,0"/></StackPanel><TextBlock Text="黑魂 1 / 2 / 3 · 法环 · 只狼 · 联机 Mod" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#9BA3B0"/></Grid>
+  <Grid x:Name="Workspace" Grid.Row="1">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <Border Background="#1C222B" CornerRadius="10" Padding="20" Margin="0,0,0,16"><StackPanel>
+    <TextBlock Text="01  游戏存档" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,12"/>
+    <DockPanel><Button DockPanel.Dock="Right" Content="重新扫描" Click="Scan_Click" Margin="10,0,0,0"/><Button DockPanel.Dock="Right" Content="手动定位" Click="Locate_Click" Margin="10,0,0,0"/><Button DockPanel.Dock="Right" Content="角色信息" Click="InspectTarget_Click" Margin="10,0,0,0"/><Button DockPanel.Dock="Right" Content="Mod 管理" Click="Mods_Click" Margin="10,0,0,0"/><ComboBox x:Name="Targets" SelectionChanged="Target_Changed"/></DockPanel>
+    <TextBlock x:Name="TargetPath" Text="扫描常见存档位置…" TextWrapping="Wrap" Foreground="#9BA3B0" Margin="0,10,0,12"/>
+    <DockPanel><Button DockPanel.Dock="Right" Content="提取并保存到备份库" Background="#A86732" Click="Capture_Click" Margin="10,0,0,0"/><TextBox x:Name="LabelBox" ToolTip="给备份取个名字，例如：古龙顶 · 无名王前" Text="我的远征"/></DockPanel>
+   </StackPanel></Border>
+   <Border Grid.Row="1" Background="#1C222B" CornerRadius="10" Padding="20" Margin="0,0,0,16"><Grid>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel Margin="0,0,0,12"><DockPanel><TextBlock DockPanel.Dock="Left" Text="02  本地备份库" FontSize="17" FontWeight="SemiBold"/><TextBlock x:Name="CountText" HorizontalAlignment="Right" Foreground="#9BA3B0"/></DockPanel><TextBlock x:Name="VaultPathText" Foreground="#9BA3B0" FontSize="11" Margin="0,6,0,0" TextTrimming="CharacterEllipsis"/></StackPanel>
+    <DataGrid x:Name="Backups" Grid.Row="1"><DataGrid.Columns><DataGridTextColumn Header="名称" Binding="{Binding Label}" Width="*"/><DataGridTextColumn Header="游戏 / Mod" Binding="{Binding GameName}" Width="320"/><DataGridTextColumn Header="保存时间" Binding="{Binding Time}" Width="175"/><DataGridTextColumn Header="大小" Binding="{Binding SizeText}" Width="90"/><DataGridTextColumn Header="类型" Binding="{Binding Kind}" Width="90"/></DataGrid.Columns></DataGrid>
+    <WrapPanel Grid.Row="2" Margin="0,16,0,0"><Button Content="导入存档" Click="Import_Click"/><Button Content="替换游戏存档" Background="#A86732" Click="Restore_Click"/><Button Content="导出存档" Click="Export_Click"/><Button Content="查看角色信息" Click="InspectBackup_Click"/><Button Content="选择备份目录" Click="ChooseVault_Click"/><Button Content="打开目录" Click="OpenVault_Click"/></WrapPanel>
+   </Grid></Border>
+   <Border Grid.Row="2" Background="#1C222B" CornerRadius="10" Padding="20"><StackPanel>
+    <DockPanel Margin="0,0,0,12"><TextBlock Text="03  GitHub 私有云存档" FontSize="17" FontWeight="SemiBold"/><TextBlock Text="仅手动同步 · SHA-256 校验" HorizontalAlignment="Right" Foreground="#9BA3B0"/></DockPanel>
+    <DockPanel Margin="0,0,0,12"><Button DockPanel.Dock="Right" Content="连接仓库" Click="Connect_Click" Margin="10,0,0,0"/><Button DockPanel.Dock="Right" Content="新建私有仓库" Click="CreateRepo_Click" Margin="10,0,0,0"/><TextBox x:Name="RepoBox" ToolTip="https://github.com/owner/repository 或 git@github.com:owner/repository.git；复用本机 gh 登录身份"/></DockPanel>
+    <WrapPanel><Button Content="双向同步全部备份" Background="#A86732" Click="Sync_Click"/><Button Content="上传选中备份" Click="Upload_Click"/><Button Content="浏览 / 下载云端备份" Click="Cloud_Click"/><Button Content="GitHub 登录" Click="Login_Click"/></WrapPanel>
+   </StackPanel></Border>
+  </Grid>
+  <StackPanel Grid.Row="2" Margin="0,16,0,0"><TextBlock x:Name="Status" Text="就绪" Foreground="#E9AC67" TextWrapping="Wrap"/><TextBlock Text="整份存档操作，包含所有角色。替换前自动备份；操作前请退出游戏。不同 Steam 账号的存档可能无法直接读取。" FontSize="11" Foreground="#8D97A5" Margin="0,6,0,0" TextWrapping="Wrap"/></StackPanel>
+ </Grid>
+</Window>

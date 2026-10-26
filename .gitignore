@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+dist/
+.vs/
+*.user
+*.sl2
+*.co2
+*.co3
+*.sl3
+.bonfire-mods/
+*.zip
+*.bak
+settings.json
+vault/
