@@ -68,7 +68,7 @@ public partial class ModsWindow : Window
     private async void Remove_Click(object sender, RoutedEventArgs e) => await Run("准备移除", async () =>
     {
         if (ModList.SelectedItem is not ModInfo item) throw new IOException("请先选择 Mod。");
-        if (item.ManagedId == null) throw new IOException("这项 Mod 是手工安装的，没有可靠的文件归属和原文件备份；请按作者说明手动移除。通过篝火安装的 Mod 可一键移除。" );
+        if (item.ManagedId == null) throw new IOException("这项 Mod 是手工安装的，没有可靠的文件归属和原文件备份；请按作者说明手动移除。通过魂匣安装的 Mod 可一键移除。" );
         if (MessageBox.Show(this, $"移除 {item.Name}？\n将恢复安装前的原文件，并删除由此安装新增且未经修改的文件。", "确认移除", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) != MessageBoxResult.Yes) { StatusText.Text = "已取消移除。"; return; }
         var manager = new ModManager(Target()); await Task.Run(() => manager.Remove(item.ManagedId)); ShowInventory(); StatusText.Text = "已移除并恢复原文件，安装记录和备份仍保留在 .bonfire-mods。";
     });

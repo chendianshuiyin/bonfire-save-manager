@@ -23,6 +23,15 @@ try
         foreach (var install in SteamGames.Scan()) Console.WriteLine(install.Game.Name + ": " + System.Text.Json.JsonSerializer.Serialize(new ModManager(install).Inventory(), new System.Text.Json.JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
         return;
     }
+    var appHome = Path.Combine(root, "application"); var localHome = Path.Combine(root, "local-data"); Directory.CreateDirectory(appHome);
+    Check(DataPaths.Resolve(appHome, localHome) == Path.Combine(localHome, "SoulsVault"), "Default data location uses SoulsVault");
+    var legacyHome = Path.Combine(localHome, "BonfireSave"); Directory.CreateDirectory(legacyHome); File.WriteAllText(Path.Combine(legacyHome, "settings.json"), "{}");
+    Check(DataPaths.Resolve(appHome, localHome) == legacyHome, "Preserve existing Bonfire settings");
+    var chosenHome = Path.Combine(root, "chosen-data");
+    File.WriteAllText(Path.Combine(appHome, "data-location.json"), System.Text.Json.JsonSerializer.Serialize(new { DataDirectory = chosenHome }));
+    Check(DataPaths.Resolve(appHome, localHome) == chosenHome, "Installation-specific data location overrides legacy default");
+    Check(DataPaths.Resolve(appHome, localHome, root) == root, "Explicit environment data location wins");
+    Reject(() => DataPaths.Resolve(appHome, localHome, "relative"), "Reject ambiguous relative data directory");
     var game = Game.ById("ds3"); var vault = new Vault(Path.Combine(root, "vault"));
     var source = Path.Combine(root, game.FileName); File.WriteAllBytes(source, Fixture(1));
     var first = vault.Capture(source, game, "Before boss");

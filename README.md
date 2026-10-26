@@ -1,10 +1,10 @@
-# 篝火 Bonfire Save
+# 魂匣 SoulsVault
 
 一个中文 Windows 桌面存档与简单 Mod 管理器，使用 **C# / WPF / .NET 8**。支持黑暗之魂 1（受死版、重制版）、2（原版、原罪学者）、3、艾尔登法环和只狼。
 
 ## 快速开始
 
-1. 从 Releases 下载 `BonfireSave-win-x64.zip`，解压后双击 `BonfireSave.exe`。发行包自带 .NET 运行时。
+1. 从 Releases 下载 `SoulsVault-win-x64.zip`，解压后双击 `SoulsVault.exe`。发行包自带 .NET 运行时。
 2. 程序扫描当前 Windows 用户的常见存档目录。未找到时，点击“手动定位”。
 3. 退出游戏，选择存档，填写备份名称，点击“提取并保存到备份库”。
 4. 选择本地备份，可查看角色信息、导出文件，或替换指定游戏存档。替换前会自动保留旧文件。
@@ -31,9 +31,9 @@
 
 ## 自选备份目录
 
-默认库为 `%LOCALAPPDATA%/BonfireSave/vault`。点击“选择备份目录”可切换至其他磁盘或已有备份库；原目录内容保留，不会自动搬迁或删除。若要迁移，先关闭程序，复制整个备份库，再选择新目录。
+默认库为 `%LOCALAPPDATA%/SoulsVault/vault`；检测到旧版 BonfireSave 配置时会继续使用旧目录。点击“选择备份目录”可切换至其他磁盘或已有备份库；原目录内容保留，不会自动搬迁或删除。若要迁移，先关闭程序，复制整个备份库，再选择新目录。
 
-仓库链接、备份位置和手动定位的存档路径保存在 `%LOCALAPPDATA%/BonfireSave/settings.json`。程序代码目录不保存个人存档。`BONFIRE_DATA_HOME` 可用于测试或隔离配置。
+仓库链接、备份位置和手动定位的存档路径保存在数据目录的 `settings.json`。程序代码目录不保存个人存档。可以在 EXE 旁放置 `data-location.json`，例如 `{"DataDirectory":"D:\\SoftWareData\\SoulsVault"}`，把配置与备份统一放到指定目录。`SOULSVAULT_DATA_HOME` 环境变量可覆盖此设置，并兼容旧版 `BONFIRE_DATA_HOME`。
 
 ## GitHub 私有同步
 
@@ -90,7 +90,7 @@ your-name/your-save-vault
 ```powershell
 dotnet build src/Bonfire.App/Bonfire.App.csproj -c Release
 dotnet run --project tests/Bonfire.Tests -c Release
-dotnet publish src/Bonfire.App/Bonfire.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/BonfireSave-win-x64
+dotnet publish src/Bonfire.App/Bonfire.App.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/SoulsVault-win-x64
 ```
 
 本地测试只在临时目录内生成模拟存档和 Mod 文件。可选的 GitHub 集成测试会向指定私有库上传模拟备份，验证往返与同步后删除当前分支上的模拟文件（Git 历史仍会保留测试提交）：

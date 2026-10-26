@@ -13,7 +13,7 @@ public record Settings(string repository, List<TargetSetting>? targets = null, s
 
 public partial class MainWindow : Window
 {
-    private readonly string dataRoot = Environment.GetEnvironmentVariable("BONFIRE_DATA_HOME") ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BonfireSave");
+    private readonly string dataRoot = DataPaths.Resolve(AppContext.BaseDirectory, Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Environment.GetEnvironmentVariable("SOULSVAULT_DATA_HOME") ?? Environment.GetEnvironmentVariable("BONFIRE_DATA_HOME"));
     private Vault vault;
     private readonly List<SaveFile> manualTargets = [];
     private bool busy;
@@ -62,7 +62,7 @@ public partial class MainWindow : Window
         if (busy) return;
         busy = true; Workspace.IsEnabled = false; Status.Text = description + "…";
         try { await action(); }
-        catch (Exception ex) { Status.Text = "操作未完成：" + ex.Message; MessageBox.Show(this, ex.Message, "篝火 · 操作未完成", MessageBoxButton.OK, MessageBoxImage.Warning); }
+        catch (Exception ex) { Status.Text = "操作未完成：" + ex.Message; MessageBox.Show(this, ex.Message, "魂匣 · 操作未完成", MessageBoxButton.OK, MessageBoxImage.Warning); }
         finally { busy = false; Workspace.IsEnabled = true; }
     }
     private Game? SelectGame(string path)

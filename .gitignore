@@ -11,4 +11,5 @@ dist/
 *.zip
 *.bak
 settings.json
+data-location.json
 vault/

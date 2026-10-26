@@ -1,7 +1,7 @@
-<Window x:Class="Bonfire.App.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="篝火 · 魂系存档管理器" Width="1280" Height="820" MinWidth="1100" MinHeight="700" Background="#131820" FontFamily="Microsoft YaHei UI" FontSize="13" WindowStartupLocation="CenterScreen">
+<Window x:Class="Bonfire.App.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="魂匣 · 魂系存档与 Mod 管理器" Width="1280" Height="820" MinWidth="1100" MinHeight="700" Background="#131820" FontFamily="Microsoft YaHei UI" FontSize="13" WindowStartupLocation="CenterScreen">
  <Grid Margin="30,24">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-  <Grid Margin="0,0,0,24"><StackPanel><TextBlock Text="BONFIRE / 篝火" FontSize="30" FontWeight="SemiBold" Foreground="#E9AC67"/><TextBlock Text="每一次远征，都有归处。" Foreground="#9BA3B0" Margin="0,6,0,0"/></StackPanel><TextBlock Text="黑魂 1 / 2 / 3 · 法环 · 只狼 · 联机 Mod" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#9BA3B0"/></Grid>
+  <Grid Margin="0,0,0,24"><StackPanel><TextBlock Text="魂匣 / SOULSVAULT" FontSize="30" FontWeight="SemiBold" Foreground="#E9AC67"/><TextBlock Text="每一次远征，都有归处。" Foreground="#9BA3B0" Margin="0,6,0,0"/></StackPanel><TextBlock Text="黑魂 1 / 2 / 3 · 法环 · 只狼 · 联机 Mod" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#9BA3B0"/></Grid>
   <Grid x:Name="Workspace" Grid.Row="1">
    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
    <Border Background="#1C222B" CornerRadius="10" Padding="20" Margin="0,0,0,16"><StackPanel>
