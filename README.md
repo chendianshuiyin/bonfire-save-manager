@@ -101,6 +101,8 @@ dotnet run --project tests/Bonfire.Tests -c Release -- --cloud your-name/private
 
 只读诊断：`--inspect-local` 解析本机存档；`--inspect-mods` 列出已安装游戏的 Mod。诊断结果可能含角色昵称，不要直接提交到公开仓库。
 
+持续集成模板见 `docs/github-actions-build.yml`。有 GitHub workflow 写入权限后，将其复制到 `.github/workflows/build.yml` 即可启用自动 Windows 构建；当前仓库未启用该工作流。
+
 ## 参考
 
 - [WPF 官方说明](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/)
